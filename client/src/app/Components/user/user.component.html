@@ -1,0 +1,67 @@
+<!-- <div> -->
+  <h1 *ngIf="user.winner" id="winner">WINNER!!</h1>
+  <h1 *ngIf="!user.winner" id="loser">Nice Try</h1>
+  <div class="user">
+    <!-- <h1 *ngIf="user.winner" style="color:blue">WINNER!!</h1> -->
+    <div class="image">
+      <img src="{{ user.avatar_url }}" alt="user pic" id="user-pic" />
+      <p>{{ user.bio }}</p>
+    </div>
+    <div class="properties">
+      <div class="prop">
+        <p class="label">username</p>
+        <p>{{ user.username }}</p>
+      </div>
+
+      <div class="prop">
+        <p class="label">name</p>
+        <p>{{ user.name }}</p>
+      </div>
+
+      <div class="prop">
+        <p class="label">location</p>
+        <p>{{ user.location }}</p>
+      </div>
+
+      <div class="prop">
+        <p class="label">titles</p>
+        <p>{{ user.titles }}</p>
+      </div>
+
+      <div class="prop">
+        <p class="label">favorite language</p>
+        <p>{{ user["favorite-language"] }}</p>
+      </div>
+
+      <div class="prop">
+        <p class="label">total stars</p>
+        <p>{{ user["total-stars"] }}</p>
+      </div>
+
+      <div class="prop">
+        <p class="label">highest star count</p>
+        <p>{{ user["highest-starred"] }}</p>
+      </div>
+
+      <div class="prop">
+        <p class="label">public repos</p>
+        <p>{{ user["public-repos"] }}</p>
+      </div>
+
+      <div class="prop">
+        <p class="label">perfect repos</p>
+        <p>{{ user["perfect-repos"] }}</p>
+      </div>
+
+      <div class="prop">
+        <p class="label">followers</p>
+        <p>{{ user.followers }}</p>
+      </div>
+
+      <div class="prop">
+        <p class="label">following</p>
+        <p>{{ user.following }}</p>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->

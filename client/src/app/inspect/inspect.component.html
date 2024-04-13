@@ -1,13 +1,15 @@
-<div
-  style="
+<div style="
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20vh;
-  "
->
+  ">
+
   <app-text-input (usernameChange)="receiveUsername($event)"></app-text-input>
   <br />
+  <p *ngIf="error" style="color:red">{{ error }}</p>
   <br />
   <button class="submit-button" (click)="onSubmit()">Inspect</button>
+  <br />
+  <app-user [user]="user" *ngIf="found" ></app-user>
 </div>

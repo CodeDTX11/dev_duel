@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+// import userProfile from './app/models/userProfile';
+// import { BehaviorSubject } from 'rxjs';
 
 const inspectUserUrl = 'http://localhost:3000/api/user/';
 const duelUsersUrl = 'http://localhost:3000/api/users?';
@@ -8,6 +10,9 @@ const duelUsersUrl = 'http://localhost:3000/api/users?';
   providedIn: 'root'
 })
 export class UserService {
+
+  // private selectedUserSource = new BehaviorSubject<userProfile | undefined>(undefined);
+  // selectedStand = this.selectedUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
