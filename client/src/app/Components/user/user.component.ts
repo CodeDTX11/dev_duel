@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { userInfo } from 'src/app/app.component';
+// import { userInfo } from 'src/app/app.component';
+import {userProfile} from 'src/app/models/userProfile';
+import { userKeys } from 'src/app/models/userProfile';
+import { UserService } from 'src/user.service';
 
 @Component({
   selector: 'app-user',
@@ -7,24 +10,13 @@ import { userInfo } from 'src/app/app.component';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
-  @Input() user: userInfo = {
-    username: '',
-    name: '',
-    location: '',
-    bio: '',
-    avatar_url: '',
-    titles: [],
-    'favorite-language': '',
-    'public-repos': 0,
-    'total-stars': 0,
-    'highest-starred': 0,
-    'perfect-repos': 0,
-    followers: 0,
-    following: 0,
-    winner: false
-  };
 
-  constructor() {}
+  user : userProfile | undefined = undefined
+  
+  constructor(private userService : UserService) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.selectedUser.subscribe(selectedUser => this.user = selectedUser)
+  }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import userProfile from './app/models/userProfile';
-// import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import {userProfile} from './app/models/userProfile';
 
 const inspectUserUrl = 'http://localhost:3000/api/user/';
 const duelUsersUrl = 'http://localhost:3000/api/users?';
@@ -11,13 +11,18 @@ const duelUsersUrl = 'http://localhost:3000/api/users?';
 })
 export class UserService {
 
-  // private selectedUserSource = new BehaviorSubject<userProfile | undefined>(undefined);
-  // selectedStand = this.selectedUserSource.asObservable();
+  private selectedUserSource = new BehaviorSubject<userProfile | undefined>(undefined);
+  // private selectedUserSource = new BehaviorSubject<userProfile>({});
+  selectedUser = this.selectedUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
+  updateUser(user: userProfile) {
+    this.selectedUserSource.next(user)
+  }
+
   async inspectUser(username = 'andrew') {
-    let data = await this.http.get(inspectUserUrl + username).toPromise();
+    let data = this.http.get<userProfile>(inspectUserUrl + username)
     console.log(data);
     return data;
   }

@@ -1,4 +1,4 @@
-<!-- <div> -->
+<div *ngIf="user !== undefined" >
   <h1 *ngIf="user.winner" id="winner">WINNER!!</h1>
   <h1 *ngIf="!user.winner" id="loser">Nice Try</h1>
   <div class="user">
@@ -8,7 +8,14 @@
       <p>{{ user.bio }}</p>
     </div>
     <div class="properties">
-      <div class="prop">
+      
+      <!-- <div class="prop" *ngFor="let item of user | keyvalue"> -->
+      <div class="prop" *ngFor="let item in user">
+        <b class="label">{{ user[item as keyof typeof user] }}</b> 
+        <!-- <b>{{ user[item as keyof userProfile] }}</b> -->
+
+      </div>
+      <!-- <div class="prop">
         <p class="label">username</p>
         <p>{{ user.username }}</p>
       </div>
@@ -61,7 +68,7 @@
       <div class="prop">
         <p class="label">following</p>
         <p>{{ user.following }}</p>
-      </div>
+      </div> --->
     </div>
   </div>
-<!-- </div> -->
+</div>

@@ -7,9 +7,14 @@
 
   <app-text-input (usernameChange)="receiveUsername($event)"></app-text-input>
   <br />
-  <p *ngIf="error" style="color:red">{{ error }}</p>
   <br />
   <button class="submit-button" (click)="onSubmit()">Inspect</button>
   <br />
-  <app-user [user]="user" *ngIf="found" ></app-user>
+  <!-- <app-user [user]="user" *ngIf="found" ></app-user> -->
+  <p *ngIf="error else elseBlock" style="color:red">{{ error }}</p>
+  <ng-template #elseBlock>
+    <!-- <app-user *ngIf="found" ></app-user> -->
+    <app-user ></app-user>
+  </ng-template>
+  
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/user.service';
-import { userInfo } from '../app.component';
+// import { userInfo } from '../app.component';
+import {userProfile} from '../models/userProfile';
 
 @Component({
   selector: 'app-duel',
@@ -11,7 +12,7 @@ export class DuelComponent implements OnInit {
   usernameOne: string = '';
   usernameTwo: string = '';
   
-  user1: userInfo = {
+  user1: userProfile = {
     username: '',
     name: '',
     location: '',
@@ -28,7 +29,7 @@ export class DuelComponent implements OnInit {
     winner: false
   };
  
-  user2: userInfo = {
+  user2: userProfile = {
     username: '',
     name: '',
     location: '',
@@ -62,7 +63,7 @@ export class DuelComponent implements OnInit {
   }
 
   
-  whoWins(user1: userInfo, user2: userInfo) {
+  whoWins(user1: userProfile, user2: userProfile) {
     
     if(user1['total-stars'] > user2['total-stars']){
       this.winner = user1.username;

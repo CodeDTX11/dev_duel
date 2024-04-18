@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from 'src/user.service';
-import { userInfo } from '../app.component';
+import { UserService } from 'src/user.service'
+import {userProfile} from '../models/userProfile';
 
 @Component({
   selector: 'app-inspect',
@@ -9,48 +9,74 @@ import { userInfo } from '../app.component';
 })
 export class InspectComponent implements OnInit {
   username: string = '';
-  user: userInfo = {
-    username: '',
-    name: '',
-    location: '',
-    bio: '',
-    avatar_url: '',
-    titles: [],
-    'favorite-language': '',
-    'public-repos': 0,
-    'total-stars': 0,
-    'highest-starred': 0,
-    'perfect-repos': 0,
-    followers: 0,
-    following: 0,
-    winner: false
-  };
+  // user: userProfile = {
+  //   username: '',
+  //   name: '',
+  //   location: '',
+  //   bio: '',
+  //   avatar_url: '',
+  //   titles: [],
+  //   'favorite-language': '',
+  //   'public-repos': 0,
+  //   'total-stars': 0,
+  //   'highest-starred': 0,
+  //   'perfect-repos': 0,
+  //   followers: 0,
+  //   following: 0,
+  //   winner: false
+  // };
+
+  user : userProfile | undefined = undefined
 
   error: any = '';
   found: boolean = false;
 
   constructor(private userService: UserService) {}
 
-  ngOnInit(): void {}
+  async ngOnInit(): Promise<void> {
+  }
 
   receiveUsername(valueEmitted: string) {
     this.username = valueEmitted;
   }
 
-  onSubmit() {
-    this.userService.inspectUser(this.username).then(
-      (response: any) => {
-        if (response) {
-          this.error = '';
-          this.found = true;
-          this.user = response;
+  async onSubmit() {
+    (await this.userService.inspectUser(this.username)).subscribe({
+      // (response : userProfile) => this.userService.updateUser(response),
+      next: (response : userProfile) => this.userService.updateUser(response),
+      error: (error: any) => {
+        // this.error = JSON.stringify(error)
+        if(error.status === 404){
+          this.error = error.statusText
         }
-      },
-      (error: any) => {
-        console.log(error);
-        this.error = 'Someting went wrong...';
-        this.found = false;
       }
-    );
+    });
+    this.userService.selectedUser.subscribe(selectedUser => {
+      if(selectedUser === undefined){
+        this.error = 'loading...'
+        this.found = false
+      } else {
+      this.user = selectedUser
+      this.found = true
+      this.error = ''
+      }
+  })
+
+
+    
+    // this.userService.inspectUser(this.username).then(
+    //   (response:any) => {
+    //     if (response) {
+    //       this.error = '';
+    //       this.found = true;
+    //       this.user = response;
+    //     }
+    //   },
+    //   (error: any) => {
+    //     console.log(error);
+    //     this.error = 'Someting went wrong...';
+    //     this.found = false;
+    //   }
+    // );
   }
 }
